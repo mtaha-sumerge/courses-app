@@ -19,8 +19,13 @@ public class CoursesController {
 
     @PostMapping("/courses")
     public ResponseEntity<Void> addCourse(@RequestBody Course course) {
-        this.courseService.addCourse(course);
-        return ResponseEntity.ok().build();
+        try {
+            this.courseService.addCourse(course);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
     @GetMapping("/courses")
@@ -30,19 +35,37 @@ public class CoursesController {
 
     @GetMapping("/courses/{id}")
     public ResponseEntity<Course> getCourse(@PathVariable int id) {
-        return ResponseEntity.ok(this.courseService.getCourseById(id));
+        try {
+            Course course = this.courseService.getCourseById(id);
+            return ResponseEntity.ok(course);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/courses/{id}")
     public ResponseEntity<Void> updateCourse(@PathVariable int id, @RequestBody Course course) {
-        this.courseService.updateCourse(course);
-        return ResponseEntity.ok().build();
+        try {
+            Course tempCourse = this.courseService.getCourseById(id);
+            tempCourse.setName(course.getName());
+            tempCourse.setDescription(course.getDescription());
+            tempCourse.setCredit(course.getCredit());
+            this.courseService.updateCourse(tempCourse);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/courses/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable int id) {
-        this.courseService.deleteCourse(id);
-        return ResponseEntity.ok().build();
+        try {
+            this.courseService.deleteCourse(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }
