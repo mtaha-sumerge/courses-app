@@ -38,6 +38,10 @@ public class CourseService {
         if (rowsAffected == 1) System.out.println("Course " + id + " is removed successfully");
     }
 
+    public Course getCourseById(int id) {
+        return this.coursesRepo.getCourse(id);
+    }
+
     public List<Course> getAllCourses() {
         return this.coursesRepo.findAll();
     }
