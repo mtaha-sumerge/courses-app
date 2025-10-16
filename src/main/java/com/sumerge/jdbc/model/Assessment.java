@@ -1,5 +1,14 @@
 package com.sumerge.jdbc.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Assessment {
 
     private int id;
@@ -7,44 +16,4 @@ public class Assessment {
 
     private Course relatedCourse;
 
-    public Assessment() {}
-
-    public Assessment(int id, String content, Course relatedCourse) {
-        this.id = id;
-        this.content = content;
-        this.relatedCourse = relatedCourse;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Course getRelatedCourse() {
-        return relatedCourse;
-    }
-
-    public void setRelatedCourse(Course relatedCourse) {
-        this.relatedCourse = relatedCourse;
-    }
-
-    @Override
-    public String toString() {
-        return "Assessment{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", relatedCourse=" + relatedCourse.getId() +
-                '}';
-    }
 }
